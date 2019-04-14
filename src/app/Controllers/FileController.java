@@ -1,5 +1,6 @@
 package app.Controllers;
 
+import app.Model.CSVFile.CSVFile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import app.Model.CSVFile.EntityTable;
 import app.Model.CSVFile.FileControler;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class FileController {
     @FXML
@@ -18,11 +21,13 @@ public class FileController {
     private FileControler fileC = new FileControler();
     private File file;
     private ObservableList<EntityTable> list;
+    private CSVFile csvFile;
 
 
     private void initFile(String path){
         //todo if(file==null)
         file = new File(path);
+        csvFile = new CSVFile(path);
     }
    // private Fil
     @FXML
@@ -63,31 +68,65 @@ public class FileController {
         list = FXCollections.observableList(fileC.open2(file.getAbsolutePath()));
         drawTable();
         resultArea.appendText("Файл был успешно открыт");
+
     }
 
-    public void create(javafx.event.ActionEvent actionEvent) {System.out.println("Из create");
+    public void create(String name) {
+        try {
+            File file = new File("C:\\Users\\Артём\\Desktop\\" + name);
+            file.createNewFile();
+            csvFile.setNameFile(file.getAbsolutePath());
+            resultArea.setText("Файл успешно создан");
+            list.remove(0,list.size());
+            drawTable();
+        }
+        catch (IOException e){
+            resultArea.setText(e.getMessage());
+        }
     }
 
-    public void save(javafx.event.ActionEvent actionEvent) {resultArea.setText("Из save");
+    public void save(javafx.event.ActionEvent actionEvent) {
+        if(file==null){resultArea.setText("Ошибка. Файл не был открыт");}
+        else {
+            try {
+                list = table.getItems();
+                csvFile.write(new ArrayList<EntityTable>(table.getItems()));
+                resultArea.setText("Файл успешно сохранен");
+            }
+            catch (IOException ex){resultArea.setText(ex.getMessage());}
+        }
+
     }
 
-    public void saveAs(javafx.event.ActionEvent actionEvent) {System.out.println("Из saveAs");
+    public void saveAs(String path) {
+        try {
+
+            csvFile.setNameFile(path);
+            ArrayList<EntityTable> op =new ArrayList<EntityTable>(table.getItems());
+            csvFile.write(op);
+            resultArea.setText("Файл успешно сохранен");
+        }
+        catch (IOException e){
+            resultArea.setText(e.getMessage());
+        }
     }
 
     public void exit(javafx.event.ActionEvent actionEvent) {System.out.println("Из exit");
     }
 
-    public void addLine(javafx.event.ActionEvent actionEvent) {
-        System.out.println("Из addLine");
-        ObservableList<EntityTable> t = table.getItems();
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i <t.size() ; i++) {
-            builder.append(t.get(i).getName())
-                    .append(' ')
-                    .append(t.get(i).getDate())
-                    .append(' ')
-                    .append(t.get(i));
-            resultArea.appendText(builder.toString());
+    public void addLine(String line) {
+        if(line!=null && line.length()>3){
+        String[] entity = line.split(";");
+        if(entity.length==3) {
+            EntityTable e = new EntityTable(entity[0],entity[1],entity[2]);
+            list.add(list.size(),e);
+        }
+        else{
+            resultArea.setText("Ошибка. Неправильное количество аргументов.");
+        }
+        }
+        else{
+            resultArea.setText("Ошибка. Добавление пустой строки невозможно.");
         }
     }
 

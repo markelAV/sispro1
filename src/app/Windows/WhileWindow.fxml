@@ -4,18 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controllers.ControllerWhile">
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controllers.ControllerWhile">
    <children>
-      <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="413.0" prefWidth="585.0">
-         <children>
-            <TextArea fx:id="textWhile" layoutX="27.0" layoutY="37.0" prefHeight="169.0" prefWidth="537.0" text="int i2=0;&#10; int i5=5; &#10; do &#10;{ &#10; i++; &#10;} while( i2&lt; i5) " AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="37.0" />
-            <Label layoutX="36.0" layoutY="14.0" text="Введите конструкцию с while:" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="14.0" />
-            <Button layoutX="467.0" layoutY="225.0" mnemonicParsing="false" onAction="#checkWhile" prefHeight="25.0" prefWidth="75.0" text="проверить" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="225.0" />
-            <Label layoutX="14.0" layoutY="269.0" text="Результат:" />
-            <TextArea fx:id="textResult" disable="true" layoutX="8.0" layoutY="298.0" prefHeight="71.0" prefWidth="537.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="11.0" />
-         </children>
-      </AnchorPane>
+      <TextArea fx:id="textWhile" layoutX="13.0" prefHeight="169.0" prefWidth="524.0" text="int i2=0;&#10; int i5=5; &#10; do &#10;{ &#10; i++; &#10;} while( i2&lt; i5) " AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="37.0" />
+      <Label text="Введите конструкцию с while:" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="14.0" />
+      <Button mnemonicParsing="false" onAction="#checkWhile" prefHeight="25.0" prefWidth="75.0" text="проверить" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="225.0" />
+      <Label text="Результат:" />
+      <TextArea fx:id="textResult" disable="true" prefHeight="71.0" prefWidth="537.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="11.0" />
    </children>
-</Pane>
+</AnchorPane>

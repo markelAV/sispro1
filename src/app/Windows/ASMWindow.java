@@ -12,7 +12,7 @@ public class ASMWindow extends Application {
     private static Parent scene;
     private static FXMLLoader loader;
     private void init1() throws IOException {
-        loader = new FXMLLoader(MainWindow.class.getResource("ASMWindow.fxml"));//.load(getClass().getResource("app.fxml"));
+        loader = new FXMLLoader(MainWindow.class.getResource("ASMWindow.fxml"));
         scene = loader.load();
     }
     @Override

@@ -29,19 +29,12 @@ public class MainWindow extends Application {
             @Override
             public void handle(javafx.event.ActionEvent event) {
                 try {
-                Parent root = FXMLLoader.load(getClass().getResource("FileWindow.fxml"));
-                Scene scene = new Scene(root);
-                Stage newWindow = new Stage();
-                newWindow.setTitle("File");
-                newWindow.setScene(scene);
-                newWindow.initModality(Modality.WINDOW_MODAL);
-                newWindow.initOwner(primaryStage);
-                newWindow.setX(primaryStage.getX() + 200);
-                newWindow.setY(primaryStage.getY() + 100);
-                newWindow.show();
-                newWindow.setResizable(false);
-            }
-            catch (IOException e) {e.printStackTrace(); }
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    FileWindow fileWindow = new FileWindow();
+                    fileWindow.start(stage);
+                }
+                catch (Exception e){ System.out.println(e.getMessage());}
             }
         });
 
@@ -49,56 +42,29 @@ public class MainWindow extends Application {
             @Override
             public void handle(javafx.event.ActionEvent event) {
                 try{
-            Parent root = FXMLLoader.load(getClass().getResource("ASMWindow.fxml"));
-            Scene scene = new Scene(root);
-            Stage newWindow = new Stage();
-            newWindow.setTitle("ASMWindow");
-            newWindow.setScene(scene);
-
-
-            newWindow.initModality(Modality.WINDOW_MODAL);
-            newWindow.initOwner(primaryStage);
-            newWindow.setX(primaryStage.getX() + 200);
-            newWindow.setY(primaryStage.getY() + 100);
-
-            newWindow.show();
-
-            newWindow.setResizable(false);
-        }
-        catch (IOException e) {e.printStackTrace();}
-
-    }
-
+                    ASMWindow window = new ASMWindow();
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    window.start(stage);
+                }
+                catch (Exception e) {e.printStackTrace();}
+            }
         });
 
         menuse.get(2).getItems().get(0).setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
                 try{
-           Parent root = FXMLLoader.load(getClass().getResource("WhileWindow.fxml"));
-           Scene scene = new Scene(root);
-           Stage newWindow = new Stage();
-           newWindow.setTitle("WhileWindow");
-           newWindow.setScene(scene);
-
-
-           newWindow.initModality(Modality.WINDOW_MODAL);
-           newWindow.initOwner(primaryStage);
-           newWindow.setX(primaryStage.getX() + 200);
-           newWindow.setY(primaryStage.getY() + 100);
-
-           newWindow.show();
-
-           newWindow.setResizable(false);
-       }
-       catch (IOException e) {e.printStackTrace();}
-
+                    WhileWindow window = new WhileWindow();
+                    Stage stage=new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    window.start(stage);
+                }
+       catch (Exception e) {e.printStackTrace();}
             }
         });
-
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
