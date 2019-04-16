@@ -1,15 +1,17 @@
 package app.Controllers;
 
 import app.Model.CSVFile.CSVFile;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import app.Model.CSVFile.EntityTable;
 import app.Model.CSVFile.FileControler;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,12 @@ public class FileController {
     @FXML
     public TableColumn<EntityTable,String> columnDate;
 
+    Callback<TableColumn<EntityTable,String>, TableCell<EntityTable,String>> cellFactory =
+            new Callback<TableColumn<EntityTable,String>,TableCell<EntityTable,String>>() {
+                public TableCell call(TableColumn p) {
+                    return new EditingCell();
+                }
+            };
 
     @FXML
     private void refreshTableView()
@@ -67,6 +75,15 @@ public class FileController {
         //EntityTable[] table=fileC.open2(file.getAbsolutePath());
         list = FXCollections.observableList(fileC.open2(file.getAbsolutePath()));
         drawTable();
+//        columnName.setCellValueFactory(cellFactory);
+//        columnName.setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<EntityTable, String>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<EntityTable, String> event) {
+//                        event.getTableView().getItems().get(event.getTablePosition().getRow()).setName(event.getNewValue());
+//                    }
+//                }
+//        );
         resultArea.appendText("Файл был успешно открыт");
 
     }
@@ -79,6 +96,8 @@ public class FileController {
             resultArea.setText("Файл успешно создан");
             list.remove(0,list.size());
             drawTable();
+
+//            columnName.setCellValueFactory( new PropertyValueFactory<EntityTable,String>());
         }
         catch (IOException e){
             resultArea.setText(e.getMessage());
@@ -137,5 +156,70 @@ public class FileController {
     }
 
     public void help(javafx.event.ActionEvent actionEvent) {System.out.println(" Из help");
+    }
+    class EditingCell extends TableCell<EntityTable, String> {
+
+        private TextField textField;
+
+        public EditingCell() {
+        }
+
+        @Override
+        public void startEdit() {
+            if (!isEmpty()) {
+                super.startEdit();
+                createTextField();
+                setText(null);
+                setGraphic(textField);
+                textField.selectAll();
+            }
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+
+            setText((String) getItem());
+            setGraphic(null);
+        }
+
+        @Override
+        public void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (empty) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                if (isEditing()) {
+                    if (textField != null) {
+                        textField.setText(getString());
+                    }
+                    setText(null);
+                    setGraphic(textField);
+                } else {
+                    setText(getString());
+                    setGraphic(null);
+                }
+            }
+        }
+
+        private void createTextField() {
+            textField = new TextField(getString());
+            textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
+            textField.focusedProperty().addListener(new ChangeListener<Boolean>(){
+                @Override
+                public void changed(ObservableValue<? extends Boolean> arg0,
+                                    Boolean arg1, Boolean arg2) {
+                    if (!arg2) {
+                        commitEdit(textField.getText());
+                    }
+                }
+            });
+        }
+
+        private String getString() {
+            return getItem() == null ? "" : getItem().toString();
+        }
     }
 }

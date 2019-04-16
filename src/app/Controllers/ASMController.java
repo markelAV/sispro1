@@ -1,5 +1,6 @@
 package app.Controllers;
 
+import app.Model.ASM.ASMModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
@@ -28,12 +29,17 @@ public class ASMController {
         double value1 = validation(this.value1.getText());
         double value2 = validation(this.value2.getText());
         builder.append("Операция прошла успешно. \nРезультат: ");
-        if(checkDiv.isSelected()){
-            builder.append(value1/value2);
+        try {
+            if (checkDiv.isSelected()) {
+
+                builder.append(ASMModule.div(value1, value2));//(value1/value2);
+            } else {
+                builder.append(ASMModule.add((int) value1, (int) value2));//(int)value1&(int)value2);
+            }
+            resultArea.setText(builder.toString());
         }
-        else{
-            builder.append((int)value1&(int)value2);
+        catch (Exception e){
+            resultArea.setText(e.getMessage());
         }
-        resultArea.setText(builder.toString());
     }
 }

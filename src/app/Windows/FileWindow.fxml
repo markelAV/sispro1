@@ -40,7 +40,7 @@
                         </Menu>
                     </menus>
                 </MenuBar>
-                <TableView id="tableOut" fx:id="table" layoutX="18.0" layoutY="65.0" prefHeight="252.0" prefWidth="555.0">
+                <TableView id="tableOut" fx:id="table" editable="true" layoutX="18.0" layoutY="65.0" prefHeight="252.0" prefWidth="555.0">
                     <columns>
                         <TableColumn fx:id="columnName" editable="true" prefWidth="156.0" text="Name" />
                         <TableColumn fx:id="columnTorZ" editable="true" prefWidth="187.0" text="Type" />
