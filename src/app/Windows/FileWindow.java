@@ -43,7 +43,6 @@ public class FileWindow extends Application {
         primaryStage.setScene(new Scene(scene, 585, 432));
         ObservableList<Node> list =scene.getChildrenUnmodifiable();
         Pane node =(Pane)list.get(0);
-        //  Platform.exit();
 
         ObservableList<Node> list2=node.getChildren();
         javafx.scene.control.MenuBar menu =(javafx.scene.control.MenuBar)list2.get(0);
