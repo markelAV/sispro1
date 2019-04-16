@@ -63,6 +63,20 @@ public class MainWindow extends Application {
        catch (Exception e) {e.printStackTrace();}
             }
         });
+        menuse.get(3).getItems().get(0).setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    DataBaseWindow window = new DataBaseWindow();
+                    Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    window.start(stage);
+                }
+                catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        });
         primaryStage.show();
     }
 

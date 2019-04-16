@@ -3,25 +3,34 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="162.0" prefWidth="429.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.File_CreateNewFileController">
+
+<AnchorPane minWidth="300.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.File_CreateNewFileController">
    <children>
-      <MenuBar prefHeight="25.0" prefWidth="141.0">
+      <MenuBar prefHeight="25.0" prefWidth="141.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
                <items>
                   <MenuItem mnemonicParsing="false" text="Open " />
-               </items></Menu>
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Asm">
                <items>
                   <MenuItem mnemonicParsing="false" text="Open" />
-               </items></Menu>
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="While">
                <items>
                   <MenuItem mnemonicParsing="false" text="Open" />
-               </items></Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="DataBase">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Open" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>
-</Pane>
+</AnchorPane>

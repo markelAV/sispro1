@@ -22,7 +22,7 @@ public class FileController {
     public TextArea resultArea;
     private FileControler fileC = new FileControler();
     private File file;
-    private ObservableList<EntityTable> list;
+    private ObservableList<EntityTable> list = FXCollections.observableList(new ArrayList<EntityTable>());
     private CSVFile csvFile;
 
 
@@ -57,6 +57,7 @@ public class FileController {
         columnName.setVisible(true);
         columnDate.setVisible(true);
         columnDate.setVisible(true);
+
     }
     private void drawTable(){
         columnName.setCellValueFactory(new PropertyValueFactory<EntityTable, String>("Name"));
@@ -74,6 +75,7 @@ public class FileController {
         initFile(name);
         //EntityTable[] table=fileC.open2(file.getAbsolutePath());
         list = FXCollections.observableList(fileC.open2(file.getAbsolutePath()));
+        list.add(list.size(),null);
         drawTable();
 //        columnName.setCellValueFactory(cellFactory);
 //        columnName.setOnEditCommit(
