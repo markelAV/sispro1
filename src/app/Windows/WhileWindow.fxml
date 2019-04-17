@@ -5,13 +5,12 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controllers.ControllerWhile">
+<AnchorPane prefHeight="393.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controllers.ControllerWhile">
    <children>
-      <TextArea fx:id="textWhile" layoutX="13.0" prefHeight="169.0" prefWidth="524.0" text="int i2=0;&#10; int i5=5; &#10; do &#10;{ &#10; i++; &#10;} while( i2&lt; i5) " AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="37.0" />
-      <Label text="Введите конструкцию с while:" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="14.0" />
-      <Button mnemonicParsing="false" onAction="#checkWhile" prefHeight="25.0" prefWidth="75.0" text="проверить" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="225.0" />
-      <Label text="Результат:" />
-      <TextArea fx:id="textResult" disable="true" prefHeight="71.0" prefWidth="537.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="11.0" />
+      <TextArea fx:id="textWhile" layoutX="14.0" layoutY="53.0" prefHeight="197.0" prefWidth="581.0" text="int i2=0;&#10; int i5=5; &#10; do &#10;{ &#10; i++; &#10;} while( i2&lt; i5) " AnchorPane.bottomAnchor="143.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="53.0" />
+      <Label layoutX="14.0" layoutY="28.0" text="Введите конструкцию с while:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="28.0" />
+      <Button layoutX="481.0" layoutY="264.0" mnemonicParsing="false" onAction="#checkWhile" prefHeight="25.0" prefWidth="75.0" text="проверить" AnchorPane.bottomAnchor="104.0" AnchorPane.rightAnchor="11.0" />
+      <Label layoutX="8.0" layoutY="268.0" text="Результат:" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="8.0" />
+      <TextArea fx:id="textResult" disable="true" prefHeight="71.0" prefWidth="566.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="11.0" />
    </children>
 </AnchorPane>

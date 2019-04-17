@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -61,17 +62,19 @@ public class FileWindow extends Application {
         ObservableList<TableColumn> columns =tableView.getColumns();
         TableColumn<EntityTable,String> column=(TableColumn<EntityTable,String>)columns.get(0);
 
+
         Callback<TableColumn<EntityTable, String>,
                 TableCell<EntityTable, String>> cellFactory
                 = (TableColumn<EntityTable, String> p) -> new EditingCell();
 
+        column.setCellValueFactory(
+                new PropertyValueFactory<>("Name"));
         column.setCellFactory(cellFactory);
         column.setOnEditCommit(
                 (TableColumn.CellEditEvent<EntityTable, String> t) -> {
-                    column.getColumns().get(t.getTablePosition().getRow()).setText(t.getNewValue());
-//                    ((EntityTable) t.getTableView().getItems().get(
-//                            t.getTablePosition().getRow())
-//                    ).setName(t.getNewValue());
+                    ((EntityTable) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                    ).setName(t.getNewValue());
                 });
 
 
@@ -298,9 +301,12 @@ public class FileWindow extends Application {
         @Override
         public void cancelEdit() {
             super.cancelEdit();
-
+            System.out.println(textField.getText());
             setText((String) getItem());
+            TableView t =this.getTableView();
+
             setGraphic(null);
+
         }
 
         @Override

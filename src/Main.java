@@ -1,5 +1,7 @@
 import app.database.bl.HibernateUtil;
+import app.database.entities.File3;
 import app.database.entities.File7;
+import app.database.servise.File3Service;
 import app.database.servise.File7Service;
 
 import java.sql.SQLException;
@@ -8,15 +10,31 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        File7Service fileService = new File7Service();
-       // File7 file = new File7();
-
+//        String[] adress ={"safari.com","vk.com","odnoklassniki.com","facebook.com","twitter.com","inst.com","ruus.com","youtube.com","prewq.com","hello.com"};
+//        String[] acess ={"свободный","свободный","закрытый","свободный","закрытый","свободный","закрытый","свободный","закрытый","закрытый"};
+//        String[] data={"03.09.2019","01.03.2019","02.03.2019","03.03.2019","04.03.2019","05.03.2019","07.03.2019","08.03.2019","03.03.2019","03.03.2019"};
+//        String[] names={"wert.doc","artek.doc","maer.doc","diplom.doc","otchet.doc","wert.doc","qwer.doc","zxcv.doc","asdf.doc","wert.doc"};
+//        int[] sizes={3,4,5,6,7,8,7,6,5,10};
+//        File7Service fileService = new File7Service();
+//        File7 file = new File7();
+//        File3 file3 = new File3();
+//        File3Service file3Service = new File3Service();
+//        for (int i = 0; i <names.length ; i++) {
+//            file3.setLocation(names[i]);
+//            file3.setSize(sizes[i]);
+//            file3.setEditDate(names[i]);
+//
+//            file3Service.add(file3);
+//        }
         //Здесь происходит добавление записи (create)
-//        file.setAddress("safari.com");
-//        file.setAccess("свободно");
-//        file.setData("03.03.2019");
+//        for (int i = 0; i <adress.length ; i++) {
+//            file.setAddress(adress[i]);
+//            file.setAccess(acess[i]);
+//            file.setData(data[i]);
+//
+//            fileService.add(file);
+//        }
 
-        //fileService.add(file);
 
 
         //Здесь происходит выбор всех записей (read)

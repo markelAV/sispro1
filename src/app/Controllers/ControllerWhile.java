@@ -19,14 +19,24 @@ public class ControllerWhile {
         String text = textWhile.getText();
         StringBuilder result = new StringBuilder();
         WhileModule whileModule;
-        if(text!=null && text.length()>1){ //todo 1 символ это от балды - по-хорошему надо посчитать минимальное количество символов
+        if(text!=null && text.length()>1){
             whileModule = new WhileModule();
             try {
                 if(whileModule.control(text)){
-                    result.append("Цикл выполнится более одного раза"); //todo добавить флаг "do" и проверәтғ его для ввывода коректного сообщения
+                    if(whileModule.isFlagDo()) {
+                        result.append("Цикл выполнится более одного раза");
+                    }
+                    else{
+                        result.append("Цикл выполнится хотя бы 1 раз");
+                    }
                 }
-                else{
-                    result.append("Цикд не выполниться более одного раза");
+                else {
+                    if (whileModule.isFlagDo()) {
+                        result.append("Цикл не выполнится более одного раза");
+                    } else {
+                        result.append("Цикл не выполнится ни разу");
+
+                    }
                 }
 
             } catch (InvalidOperationException e){

@@ -16,7 +16,7 @@ public class FileControler {
         EntityTable[] lines =null;
         try{
             FileInputStream reader = new FileInputStream(name);
-            InputStreamReader isr = new InputStreamReader(reader,"Windows-1251");
+            InputStreamReader isr = new InputStreamReader(reader,"UTF-8");
             FileModule file = new FileModule();
             BufferedReader read = new BufferedReader(isr);
             System.out.println(read.readLine());
@@ -34,7 +34,7 @@ public class FileControler {
         ArrayList<EntityTable> lines =null;
         try{
             FileInputStream reader = new FileInputStream(name);
-            InputStreamReader isr = new InputStreamReader(reader,"Windows-1251");
+            InputStreamReader isr = new InputStreamReader(reader,"UTF-8");
             FileModule file = new FileModule();
             BufferedReader read = new BufferedReader(isr);
             lines = file.read2(new BufferedReader(isr));

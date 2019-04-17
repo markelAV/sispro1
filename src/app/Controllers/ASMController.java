@@ -24,7 +24,7 @@ public class ASMController {
         return Double.parseDouble(s);
     }
 
-    public void count(ActionEvent actionEvent) { //todo переделать на работу с модулем
+    public void count(ActionEvent actionEvent) {
         StringBuilder builder = new StringBuilder();
         double value1 = validation(this.value1.getText());
         double value2 = validation(this.value2.getText());
@@ -32,9 +32,9 @@ public class ASMController {
         try {
             if (checkDiv.isSelected()) {
 
-                builder.append(ASMModule.div(value1, value2));//(value1/value2);
+                builder.append(ASMModule.div(value1, value2));
             } else {
-                builder.append(ASMModule.add((int) value1, (int) value2));//(int)value1&(int)value2);
+                builder.append(ASMModule.add((int) value1, (int) value2));
             }
             resultArea.setText(builder.toString());
         }

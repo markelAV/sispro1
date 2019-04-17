@@ -21,6 +21,13 @@ public class File7 {
     //@ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class, cascade = CascadeType.ALL)
     //private User user;
 
+
+    public File7(String address, String access, String data) {
+        this.address = address;
+        this.access = access;
+        this.data = data;
+    }
+
     public File7() {
     }
 

@@ -24,6 +24,11 @@ public class File3 {
     public File3() {
     }
 
+    public File3(String location, int size, String editDate) {
+        this.location = location;
+        this.size = size;
+        this.editDate = editDate;
+    }
 
     public int getId() {
         return id;

@@ -26,6 +26,9 @@ public class FileController {
     private CSVFile csvFile;
 
 
+    public void initialize() {
+
+    }
     private void initFile(String path){
         //todo if(file==null)
         file = new File(path);
@@ -41,12 +44,6 @@ public class FileController {
     @FXML
     public TableColumn<EntityTable,String> columnDate;
 
-    Callback<TableColumn<EntityTable,String>, TableCell<EntityTable,String>> cellFactory =
-            new Callback<TableColumn<EntityTable,String>,TableCell<EntityTable,String>>() {
-                public TableCell call(TableColumn p) {
-                    return new EditingCell();
-                }
-            };
 
     @FXML
     private void refreshTableView()
@@ -57,7 +54,6 @@ public class FileController {
         columnName.setVisible(true);
         columnDate.setVisible(true);
         columnDate.setVisible(true);
-
     }
     private void drawTable(){
         columnName.setCellValueFactory(new PropertyValueFactory<EntityTable, String>("Name"));
@@ -75,7 +71,6 @@ public class FileController {
         initFile(name);
         //EntityTable[] table=fileC.open2(file.getAbsolutePath());
         list = FXCollections.observableList(fileC.open2(file.getAbsolutePath()));
-        list.add(list.size(),null);
         drawTable();
 //        columnName.setCellValueFactory(cellFactory);
 //        columnName.setOnEditCommit(
@@ -94,6 +89,7 @@ public class FileController {
         try {
             File file = new File("C:\\Users\\Артём\\Desktop\\" + name);
             file.createNewFile();
+            initFile("C:\\Users\\Артём\\Desktop\\" + name);
             csvFile.setNameFile(file.getAbsolutePath());
             resultArea.setText("Файл успешно создан");
             list.remove(0,list.size());
@@ -159,69 +155,5 @@ public class FileController {
 
     public void help(javafx.event.ActionEvent actionEvent) {System.out.println(" Из help");
     }
-    class EditingCell extends TableCell<EntityTable, String> {
 
-        private TextField textField;
-
-        public EditingCell() {
-        }
-
-        @Override
-        public void startEdit() {
-            if (!isEmpty()) {
-                super.startEdit();
-                createTextField();
-                setText(null);
-                setGraphic(textField);
-                textField.selectAll();
-            }
-        }
-
-        @Override
-        public void cancelEdit() {
-            super.cancelEdit();
-
-            setText((String) getItem());
-            setGraphic(null);
-        }
-
-        @Override
-        public void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
-
-            if (empty) {
-                setText(null);
-                setGraphic(null);
-            } else {
-                if (isEditing()) {
-                    if (textField != null) {
-                        textField.setText(getString());
-                    }
-                    setText(null);
-                    setGraphic(textField);
-                } else {
-                    setText(getString());
-                    setGraphic(null);
-                }
-            }
-        }
-
-        private void createTextField() {
-            textField = new TextField(getString());
-            textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
-            textField.focusedProperty().addListener(new ChangeListener<Boolean>(){
-                @Override
-                public void changed(ObservableValue<? extends Boolean> arg0,
-                                    Boolean arg1, Boolean arg2) {
-                    if (!arg2) {
-                        commitEdit(textField.getText());
-                    }
-                }
-            });
-        }
-
-        private String getString() {
-            return getItem() == null ? "" : getItem().toString();
-        }
-    }
 }

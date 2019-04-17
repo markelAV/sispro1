@@ -14,6 +14,11 @@ public class WhileModule { //todo перейти на регулрки
     private ArrayList<String> listName;
     private String operation;
     private String text;
+    private boolean flagDo=true;
+    private boolean flagError =true;
+
+    public boolean isFlagDo(){return flagDo;}
+    public boolean isFlagError(){return flagError;}
 
     public WhileModule() {
         this.ident = new HashMap<String, Double>();
@@ -29,6 +34,7 @@ public class WhileModule { //todo перейти на регулрки
         if(condition!=null){
             parseCondition(condition);
             if(controlValueOfIdent()){
+                flagError=false;
                 return controlCondition();
             }
 
@@ -115,6 +121,7 @@ public class WhileModule { //todo перейти на регулрки
             }
         }
         if(i==-1){
+            flagDo=false;
             i=begin;
             while (i<text.length() && text.charAt(i) !='{') { i++;}
             if(i<text.length()){
@@ -151,7 +158,7 @@ public class WhileModule { //todo перейти на регулрки
                 }
                 else{
                     i=parseIdent(condit,i);
-                    if(i<0) throw new ParseIdentifierException();
+                    if(i<0) throw new ParseIdentifierException("Ошибка в имени переменной");
                 }
 
 
@@ -197,7 +204,7 @@ public class WhileModule { //todo перейти на регулрки
         }
         return result;
     }
-    private int parseOperationComp(String str, int index){
+    private int parseOperationComp(String str, int index) {
         int result = -1;
         StringBuilder builder = new StringBuilder();
         while (index < str.length()-1 && (str.charAt(index)=='=' || str.charAt(index)=='<' || str.charAt(index)=='>')){
@@ -210,14 +217,16 @@ public class WhileModule { //todo перейти на регулрки
         }
         return result;
     }
-    private boolean controlValueOfIdent(){
+    private boolean controlValueOfIdent() throws ParseIdentifierException{
         boolean result = true;
         int i=0;
         while(i<listName.size() && variableInitializationСheck(listName.get(i))){
             //поиск и инициализация переменных
             i++;
         }
-        return result; //todo return i=listName.size();
+        if(i<listName.size()) throw new ParseIdentifierException("Ошибка переменная не проинициализирована.");
+
+        return i==listName.size(); //todo return i=listName.size();
     }
     private boolean variableInitializationСheck(String name){
        //todo переделать под регулярки String[] lines=text.split("\\s*(name)\\s*(=)\\s(-)")
